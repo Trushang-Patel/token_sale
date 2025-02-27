@@ -16,12 +16,20 @@ contract TrushangToken{
         address indexed _to,
         uint256 _value
     );
+    //transfer
 
     mapping(address => uint256) public balanceOf;
+    //allowance
+    mapping(address => mapping(address => uint256)) public allowance;
 
+    //approve
+    event Approval(
+        address indexed _owner,
+        address indexed _spender,
+        uint256 _value
+        );
+        
     //Constructer
-    //Set the total number of tokens
-    //Read the total number of tokens
     constructor(uint256 _initialSupply){
         balanceOf[msg.sender] = _initialSupply;
         totalSupply = _initialSupply;
@@ -45,4 +53,17 @@ contract TrushangToken{
         
         return true;
     }
+
+    //Approve
+    function approve(address _spender, uint256 _value) public returns(bool success){
+        //allowance
+        //Approval event
+        allowance[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+
+        return true;
+    }
+
+    //TransferFrom
+    
 }
