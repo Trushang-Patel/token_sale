@@ -65,5 +65,18 @@ contract TrushangToken{
     }
 
     //TransferFrom
-    
+    function transferFrom(address _from, address _to, uint256 _value) public returns(bool success){
+        //Check if the sender has enough balance
+        require(_value <= balanceOf[_from], "Insufficient balance, transfer rejected");
+        //Check if the allowance is enough
+        require(_value <= allowance[_from][msg.sender], "Insufficient allowance, transfer rejected");
+        //Change the balance
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+        //Update the allowance
+        allowance[_from][msg.sender] -= _value;
+        //Transfer event
+        emit Transfer(_from, _to, _value);
+        return true;
+    }
 }
