@@ -17,8 +17,6 @@ contract('TrushangToken', function(accounts) {
          });
         });
     
-    
-    
         it('allocates the initial supply upon deployment', function() {
         return TrushangToken.deployed().then(function(instance) {
             tokenInstance = instance;
@@ -56,7 +54,6 @@ contract('TrushangToken', function(accounts) {
             assert.equal(balance.toNumber(), 750000, 'deducts the amount from the sending account');
         });
     });
-
 
     it('approves tokens for delegated transfer', function() {
         return TrushangToken.deployed().then(function(instance) {
@@ -125,4 +122,7 @@ contract('TrushangToken', function(accounts) {
             assert.equal(allowance.toNumber(), 0, 'deducts the amount from the allowance');
      });
     });
+
+
+    
 });
