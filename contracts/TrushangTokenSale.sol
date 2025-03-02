@@ -42,4 +42,16 @@ contract TrushangTokenSale {
         emit Sell(msg.sender, _numberOfTokens);
     }
 
+
+    // Ending Token Sale
+    function endSale() public {
+        //Require admin
+        require(msg.sender == admin);
+        //Transfer remaining tokens to admin
+        uint256 unsoldTokens = tokenContract.balanceOf(address(this));
+        require(tokenContract.transfer(admin, unsoldTokens));
+        
+        //Destroy contract
+        selfdestruct(payable(admin));
+    }
 }
